@@ -1,0 +1,72 @@
+
+Lösenoprd till databas (vet inte om de är postgres eller på supabase)
+X9KKCT*en(&$T98
+
+(kolla vilken server är just nu på nginx inte apache)
+För att köra lokalt 
+ändra databas inställningar i .env 
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=8889
+DB_DATABASE=LinkMonitor
+DB_USERNAME=LinkMonitor
+DB_PASSWORD=LinkMonitor
+
+migrera på nytt (ändrat några namn på tabeller)
+
+byt alla === true till 1 i controllers (bara där den hämtar från databasen)
+
+php artisan serve
+npm install && run dev
+
+för att köra på heruko
+
+.env
+DB_CONNECTION=pgsql
+DB_HOST=ceqbglof0h8enj.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com
+DB_PORT=5432
+DB_DATABASE=d9os5gmvv58un5
+DB_USERNAME=u15an66e5nuapo
+DB_PASSWORD=pc2ec74df8b13f405ef4dd60f5b7c6f4c0975208b14dc818fd293602dc69193ef
+
+
+Config vars (heruko app settings)
+APP_DEBUG true
+APP_ENV production
+APP_KEY base64:7Trk+xlHo1HDrHHvkh0Qd77LCNkydA0NMYmIYZbYx2E=
+APP_URL https://quiet-stream-17873-96d9fe60ffcf.herokuapp.com/
+DATABASE_URL postgres://u15an66e5nuapo:pc2ec74df8b13f405ef4dd60f5b7c6f4c0975208b14dc818fd293602dc69193ef@ceqbglof0h8enj.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d9os5gmvv58un5
+DB_CONNECTION pgsql
+DB_DATABASE d9os5gmvv58un5
+DB_HOST ceqbglof0h8enj.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com
+DB_PASSWORD pc2ec74df8b13f405ef4dd60f5b7c6f4c0975208b14dc818fd293602dc69193ef
+DB_PORT 5432
+DB_USERNAME u15an66e5nuapo
+LOG_LEVEL DEBUG
+
+Add-ons Heruko Postgres (databas)
+sätt alla värden och migrera genom
+heroku run php artisan migrate --app quiet-stream-17873 
+
+för att göra på befintlig
+heroku run php artisan migrate:fresh --app quiet-stream-17873
+
+
+Heruko scheduler (scheudle commands)
+Klicka på länk och sätt command php artisan schedule:work
+
+
+för att ladda upp nytt till heroku köra
+
+git add .
+git commit -m "kommentar"
+git push heroku main
+heroku logs --tail (för att kolla fel)
+
+Loggar i heruko från laravel
+
+heroku config --app quiet-stream-17873
+heroku config:set LOG_CHANNEL=stack LOG_LEVEL=debug --app quiet-stream-17873
+
+heroku logs --tail --app quiet-stream-17873
+ 

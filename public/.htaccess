@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirect root requests to public/index.php
+    RewriteRule ^$ public/index.php [L]
+
+    # Redirect requests to public/index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ public/index.php [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    <IfModule mod_alias.c>
+        # Redirect all requests to public/index.php
+        RedirectMatch 302 ^(.*)$ /public/index.php
+    </IfModule>
+</IfModule>
